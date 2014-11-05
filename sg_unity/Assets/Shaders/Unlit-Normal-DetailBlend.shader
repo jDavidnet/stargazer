@@ -3,10 +3,9 @@
 // - no lightmap support
 // - no per-material color
 
-Shader "Custom/Unlit/Texture Detail Blend DS" {
+Shader "Custom/Unlit/Detail Blend DS" {
 Properties {
-	_MainTex ("Base (RGB) Blend (A)", 2D) = "white" {}
-	_DetailTex ("Detail (RGB)", 2D) = "black" {}
+	_MainTex ("Detail (RGB) Blend (A)", 2D) = "white" {}
 }
 
 SubShader {
@@ -14,6 +13,8 @@ SubShader {
 	LOD 100
 	
 	Cull Off
+	Blend SrcAlpha OneMinusSrcAlpha 
+
 	Pass {  
 		CGPROGRAM
 			#pragma vertex vert
@@ -33,8 +34,6 @@ SubShader {
 
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
-			sampler2D _DetailTex;
-//			float4 _DetailTex_ST;
 			
 			v2f vert (appdata_t v)
 			{
@@ -47,8 +46,6 @@ SubShader {
 			fixed4 frag (v2f i) : SV_Target
 			{
 				fixed4 col = tex2D(_MainTex, i.texcoord);
-				fixed4 detail = tex2D(_DetailTex, i.texcoord);
-				col.rgb = col.rgb * (1 - col.a) + col.a * detail.rgb;
 				return col;
 			}
 		ENDCG
