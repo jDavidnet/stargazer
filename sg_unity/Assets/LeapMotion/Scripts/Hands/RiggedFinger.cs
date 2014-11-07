@@ -30,5 +30,13 @@ public class RiggedFinger : FingerModel {
       if (bones[i] != null)
         bones[i].rotation = GetBoneRotation(i) * Reorientation();
     }
+    if (this.fingerType == Finger.FingerType.TYPE_INDEX) {
+      // Thibaud: raycast index finger tip to infinity
+      Vector3 fromPosition = GetJointPosition (NUM_BONES - 1);
+      Vector3 toPosition = GetJointPosition (NUM_BONES);
+      Vector3 direction = toPosition - fromPosition;
+      toPosition = fromPosition + direction*100.0f;
+      Debug.DrawLine (fromPosition, toPosition, Color.blue);
+    }
   }
 }
