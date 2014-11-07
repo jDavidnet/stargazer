@@ -31,7 +31,7 @@ public class RiggedFinger : FingerModel {
         bones[i].rotation = GetBoneRotation(i) * Reorientation();
     }
     if (this.fingerType == Finger.FingerType.TYPE_INDEX) {
-      // Thibaud: raycast index finger tip to infinity
+      // Thibaud: raycast index finger tip to infinity; use RiggedPepperCutHand + Gizmos
       Vector3 fromPosition = GetJointPosition (NUM_BONES - 1);
       Vector3 toPosition = GetJointPosition (NUM_BONES);
       Vector3 direction = toPosition - fromPosition;
