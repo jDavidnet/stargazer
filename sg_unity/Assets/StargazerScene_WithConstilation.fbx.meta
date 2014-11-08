@@ -1,0 +1,144 @@
+fileFormatVersion: 2
+guid: 81c7a4d23d38042cf821f7c60e54a87c
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Constilation_01
+    100002: Dunes
+    100004: Dunes_MeshPart0
+    100006: Dunes_MeshPart1
+    100008: Illustration_01
+    100010: L_1
+    100012: L_2
+    100014: L_3
+    100016: L_4
+    100018: L_5
+    100020: L_6
+    100022: L_7
+    100024: L_8
+    100026: L_9
+    100028: Numbered
+    100030: Parent
+    100032: SkyBox
+    100034: //RootNode
+    400000: Constilation_01
+    400002: Dunes
+    400004: Dunes_MeshPart0
+    400006: Dunes_MeshPart1
+    400008: Illustration_01
+    400010: L_1
+    400012: L_2
+    400014: L_3
+    400016: L_4
+    400018: L_5
+    400020: L_6
+    400022: L_7
+    400024: L_8
+    400026: L_9
+    400028: Numbered
+    400030: Parent
+    400032: SkyBox
+    400034: //RootNode
+    2300000: Constilation_01
+    2300002: Dunes_MeshPart0
+    2300004: Dunes_MeshPart1
+    2300006: Illustration_01
+    2300008: L_1
+    2300010: L_2
+    2300012: L_3
+    2300014: L_4
+    2300016: L_5
+    2300018: L_6
+    2300020: L_7
+    2300022: L_8
+    2300024: L_9
+    2300026: Numbered
+    2300028: Parent
+    2300030: SkyBox
+    3300000: Constilation_01
+    3300002: Dunes_MeshPart0
+    3300004: Dunes_MeshPart1
+    3300006: Illustration_01
+    3300008: L_1
+    3300010: L_2
+    3300012: L_3
+    3300014: L_4
+    3300016: L_5
+    3300018: L_6
+    3300020: L_7
+    3300022: L_8
+    3300024: L_9
+    3300026: Numbered
+    3300028: Parent
+    3300030: SkyBox
+    4300000: Dunes_MeshPart0
+    4300002: Dunes_MeshPart1
+    4300004: SkyBox
+    4300006: Numbered
+    4300008: Illustration_01
+    4300010: Constilation_01
+    4300012: Parent
+    4300014: L_5
+    4300016: L_6
+    4300018: L_8
+    4300020: L_9
+    4300022: L_1
+    4300024: L_2
+    4300026: L_3
+    4300028: L_4
+    4300030: L_7
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
