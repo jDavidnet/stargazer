@@ -32,11 +32,7 @@ public class RiggedFinger : FingerModel {
     }
     if (this.fingerType == Finger.FingerType.TYPE_INDEX) {
       // Thibaud: raycast index finger tip to infinity; use RiggedPepperCutHand + Gizmos
-      Vector3 fromPosition = GetJointPosition (NUM_BONES - 1);
-      Vector3 toPosition = GetJointPosition (NUM_BONES);
-      Vector3 direction = toPosition - fromPosition;
-      toPosition = fromPosition + direction*100.0f;
-      Debug.DrawLine (fromPosition, toPosition, Color.blue);
+      Debug.DrawRay(GetBoneCenter(3), GetBoneDirection(3) * 100.0f, Color.blue);
     }
   }
 }
