@@ -1957,9 +1957,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   separateLeftRight: 1
-  leftGraphicsModel: {fileID: 11400010, guid: f908b62ffbe864392871ccab788e9c5e, type: 2}
+  leftGraphicsModel: {fileID: 11400010, guid: 77e648f8371be4aab828cbf4465b94c4, type: 2}
   leftPhysicsModel: {fileID: 11400008, guid: 4b359b2f0d7d14ef0a97b45ec153a3ef, type: 2}
-  rightGraphicsModel: {fileID: 11400010, guid: 7f1ffbb7584d8421eb3981b9cd86b130, type: 2}
+  rightGraphicsModel: {fileID: 11400010, guid: 3f4c1932d34b14754bb571921cd378e2, type: 2}
   rightPhysicsModel: {fileID: 11400008, guid: 4b359b2f0d7d14ef0a97b45ec153a3ef, type: 2}
   toolModel: {fileID: 0}
   isHeadMounted: 1
@@ -2249,12 +2249,12 @@ Prefab:
     - target: {fileID: 11400004, guid: 924c754b42d789b4b81e6a2b8450125e, type: 2}
       propertyPath: leftGraphicsModel
       value: 
-      objectReference: {fileID: 11400010, guid: f908b62ffbe864392871ccab788e9c5e,
+      objectReference: {fileID: 11400010, guid: 77e648f8371be4aab828cbf4465b94c4,
         type: 2}
     - target: {fileID: 11400004, guid: 924c754b42d789b4b81e6a2b8450125e, type: 2}
       propertyPath: rightGraphicsModel
       value: 
-      objectReference: {fileID: 11400010, guid: 7f1ffbb7584d8421eb3981b9cd86b130,
+      objectReference: {fileID: 11400010, guid: 3f4c1932d34b14754bb571921cd378e2,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 924c754b42d789b4b81e6a2b8450125e, type: 2}
