@@ -30,9 +30,5 @@ public class RiggedFinger : FingerModel {
       if (bones[i] != null)
         bones[i].rotation = GetBoneRotation(i) * Reorientation();
     }
-    if (this.fingerType == Finger.FingerType.TYPE_INDEX) {
-      // Thibaud: raycast index finger tip to infinity; use RiggedPepperCutHand + Gizmos
-      Debug.DrawRay(GetBoneCenter(3), GetBoneDirection(3) * 100.0f, Color.blue);
-    }
   }
 }
