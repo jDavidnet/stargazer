@@ -53,8 +53,8 @@ public class RiggedFingerPointer : RiggedFinger
 			{
 				if (lineRenderer != null) {
 					// show the LineRenderer
-					Vector3 start = GetBoneCenter(bone_distal);
-					Vector3 dir = GetBoneDirection(bone_distal);
+					Vector3 start = GetTipPosition(); //GetBoneCenter(bone_distal);
+					Vector3 dir = GetRay().direction; //GetBoneDirection(bone_distal);
 					Vector3 end = start + dir * lineLength;
 					lineRenderer.enabled = true;
 					lineRenderer.SetPosition(0, start);
@@ -64,7 +64,8 @@ public class RiggedFingerPointer : RiggedFinger
 					{
 						if (hit.collider)
 						{
-							print ("Hit: " + hit.collider.gameObject.name);
+//							print ("Hit: " + hit.collider.gameObject.name);
+							hit.collider.SendMessage("OnMouseOver", SendMessageOptions.DontRequireReceiver);
 							//lineRenderer.SetPosition(1, new Vector3(0, 0, hit.distance));
 						}
 					}
