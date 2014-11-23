@@ -11,6 +11,8 @@ using Leap;
 // The model for our rigid hand made out of various polyhedra.
 public class RigidHand : SkeletalHand {
 
+  Controller controller;
+  private LineRenderer lineRenderer;
   public float filtering = 0.5f;
 
   void Start() {
@@ -20,6 +22,8 @@ public class RigidHand : SkeletalHand {
 
   public override void InitHand() {
     base.InitHand();
+	controller = new Controller ();
+	controller.EnableGesture (Gesture.GestureType.TYPE_SWIPE);
   }
 
   public override void UpdateHand() {
@@ -28,6 +32,10 @@ public class RigidHand : SkeletalHand {
         fingers[f].UpdateFinger();
     }
 
+	Frame frame = controller.Frame();
+	foreach (Gesture g in frame.Gestures())
+		if (g.Type == Gesture.GestureType.TYPE_SWIPE)
+			print ("Swipe");
     if (palm != null) {
       // Set palm velocity.
       Vector3 target_position = GetPalmCenter();
@@ -50,6 +58,27 @@ public class RigidHand : SkeletalHand {
         float delta_radians = (1 - filtering) * angle * Mathf.Deg2Rad;
         palm.rigidbody.angularVelocity = delta_radians * axis / Time.deltaTime;
       }
+      // which hand is this?
+      if (hand_.IsLeft) {
+        lineRenderer = FingerLineRenderers.Left;
+      } else if (hand_.IsRight) {
+        lineRenderer = FingerLineRenderers.Right;
+      } else {
+        return;
+      }
+      Vector3 start = GetPalmCenter();
+      Vector3 end = GetPalmNormal() * 100.0f;
+      if (lineRenderer != null) {
+        lineRenderer.SetPosition(0, start);
+        lineRenderer.SetPosition(1, end);
+      }
+      RaycastHit hit;
+      if (Physics.Raycast (start, end, out hit))
+        if (hit.collider)
+          if (hit.collider.gameObject.name.StartsWith("L_")) {
+            print ("Palm hit: " + hit.collider.gameObject.name);
+            hit.collider.SendMessage("OnMouseOver", SendMessageOptions.DontRequireReceiver);
+          }
     }
   }
 }

@@ -56,16 +56,16 @@ public class RiggedFingerPointer : RiggedFinger
 					Vector3 start = GetTipPosition(); //GetBoneCenter(bone_distal);
 					Vector3 dir = GetRay().direction; //GetBoneDirection(bone_distal);
 					Vector3 end = start + dir * lineLength;
-					lineRenderer.enabled = true;
-					lineRenderer.SetPosition(0, start);
-					lineRenderer.SetPosition(1, end);
+					//lineRenderer.enabled = true;
+					//lineRenderer.SetPosition(0, start);
+					//lineRenderer.SetPosition(1, end);
 					RaycastHit hit;
 					if (Physics.Raycast (start, dir*lineLength, out hit))
 					{
 						if (hit.collider)
 						{
 //							print ("Hit: " + hit.collider.gameObject.name);
-							hit.collider.SendMessage("OnMouseOver", SendMessageOptions.DontRequireReceiver);
+							//hit.collider.SendMessage("OnMouseOver", SendMessageOptions.DontRequireReceiver);
 							//lineRenderer.SetPosition(1, new Vector3(0, 0, hit.distance));
 						}
 					}
@@ -80,7 +80,7 @@ public class RiggedFingerPointer : RiggedFinger
 				if (lineRenderer != null)
 				{
 					// hide the LineRenderer
-					lineRenderer.enabled = false;
+					//lineRenderer.enabled = false;
 				}
 			}
 		}
