@@ -5,7 +5,15 @@ public class SphereLines : MonoBehaviour
 {
 	public Material material;
 
-	private const float kLineWidth = 0.1f;
+	public int Count
+	{
+		get
+		{
+			return points.Count;
+		}
+	}
+
+	private const float kLineWidth = 1f;
 	private const int kLineSegments = 180;
 
 	private List<Vector3> points = new List<Vector3>();
@@ -13,9 +21,7 @@ public class SphereLines : MonoBehaviour
 
 	public void Add(Vector3 point)
 	{
-//		point = transform.TransformPoint(point.normalized);
-		// Shrink in a bit from the radius size, so that the line shows up in front of the sphere
-		points.Add(point.normalized * 0.45f);
+		points.Add(point);
 
 		if (points.Count >= 2)
 		{
@@ -38,7 +44,7 @@ public class SphereLines : MonoBehaviour
 		lineRenderer = gameObject.AddComponent<LineRenderer>();
 		lineRenderer.SetWidth(kLineWidth, kLineWidth);
 		lineRenderer.SetColors(Color.white, Color.white);
-		lineRenderer.useWorldSpace = false;
+		lineRenderer.useWorldSpace = true;
 		lineRenderer.material = material;
 	}
 }

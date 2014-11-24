@@ -5,6 +5,7 @@
 
 Shader "Custom/Unlit/Texture DS" {
 Properties {
+	_Color ("Main Color", Color) = (1,1,1,1)
 	_MainTex ("Base (RGB)", 2D) = "white" {}
 }
 
@@ -32,6 +33,7 @@ SubShader {
 
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
+			float4 _Color;
 			
 			v2f vert (appdata_t v)
 			{
@@ -44,7 +46,7 @@ SubShader {
 			fixed4 frag (v2f i) : SV_Target
 			{
 				fixed4 col = tex2D(_MainTex, i.texcoord);
-				return col;
+				return col * _Color;
 			}
 		ENDCG
 	}

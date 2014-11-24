@@ -49,9 +49,9 @@ public class RigidHand : SkeletalHand {
     }
 
 	Frame frame = controller.Frame();
-	foreach (Gesture g in frame.Gestures())
-		if (g.Type == Gesture.GestureType.TYPE_SWIPE)
-			print ("Swipe");
+//	foreach (Gesture g in frame.Gestures())
+//		if (g.Type == Gesture.GestureType.TYPE_SWIPE)
+//			print ("Swipe");
     if (palm != null) {
       // Set palm velocity.
       Vector3 target_position = GetPalmCenter();
