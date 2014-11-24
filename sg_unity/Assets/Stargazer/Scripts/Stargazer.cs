@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TitleText : MonoBehaviour 
+public class Stargazer : MonoBehaviour 
 {
 	public Transform viewTransform = null;
+	public Transform constellations = null;
 
 	private bool IsLookingUp
 	{
@@ -116,7 +117,7 @@ public class TitleText : MonoBehaviour
 			yield return new WaitForSeconds(ht.ShowText("Go ahead...Relax and lie down..."));
 		}
 
-		Star[] stars = GameObject.FindObjectsOfType<Star>();
+		Star[] stars = constellations.GetComponentsInChildren<Star>(true);
 
 		yield return new WaitForSeconds(3f);
 
@@ -125,9 +126,8 @@ public class TitleText : MonoBehaviour
 		{
 			foreach (Star s in stars)
 			{
-				if (!s)
+				if (!s || s.Activated)
 				{
-					Debug.Log("One star down");
 					touchedOneStar = true;
 					break;
 				}
@@ -136,6 +136,7 @@ public class TitleText : MonoBehaviour
 			if (!touchedOneStar)
 			{
 				yield return new WaitForSeconds(ht.ShowText("Look for the brigtest star in the sky..."));
+				yield return new WaitForSeconds(ht.ShowText("Touch it..."));
 			}
 		}
 
@@ -147,16 +148,17 @@ public class TitleText : MonoBehaviour
 			foreach (Star s in stars)
 			{
 				// If there is still one star in the sky we are not done
-				if (s)
+				if (s && !s.Activated)
 				{
-					Debug.Log(s.name + " is still active");
 					allDone = false;
 					break;
 				}
 			}
+
+			yield return null;
 		}
 		       		       
-		yield return new WaitForSeconds(3f);
+		yield return new WaitForSeconds(5f);
 		yield return new WaitForSeconds(ht.ShowText("Enjoy your handiwork :)"));
 		Destroy(gameObject);
 	}

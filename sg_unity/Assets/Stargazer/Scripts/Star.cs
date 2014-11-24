@@ -3,6 +3,14 @@ using System.Collections;
 
 public class Star : MonoBehaviour
 {
+	public bool Activated
+	{
+		get
+		{
+			return activatedParticles != null;
+		}
+	}
+
 	public GameObject enabledParticlesPrefab = null;
 	public GameObject activatedParticlesPrefab = null;
 

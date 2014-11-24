@@ -9,9 +9,7 @@ public class HelperText : MonoBehaviour
 	public float ShowText(string text)
 	{
 		Vector3 spawnPosition = cameraTransform.transform.position + cameraTransform.TransformDirection(Vector3.forward * 15f);
-		GameObject go = Instantiate(prefab, spawnPosition, Quaternion.identity) as GameObject;
-		go.transform.LookAt(cameraTransform.position);
-		go.transform.Rotate(Vector3.up, 180f); // It's necessary to rotate the text around 180 degrees for some reason
+		GameObject go = Instantiate(prefab, spawnPosition, cameraTransform.rotation) as GameObject;
 		TextMesh tm = go.GetComponent<TextMesh>();
 		tm.text = text;
 		
