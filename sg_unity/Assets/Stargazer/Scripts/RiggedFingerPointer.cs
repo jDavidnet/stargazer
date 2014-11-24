@@ -65,7 +65,7 @@ public class RiggedFingerPointer : RiggedFinger
 						if (hit.collider)
 						{
 //							print ("Hit: " + hit.collider.gameObject.name);
-							//hit.collider.SendMessage("OnMouseOver", SendMessageOptions.DontRequireReceiver);
+							hit.collider.SendMessage("OnMouseOver", SendMessageOptions.DontRequireReceiver);
 							//lineRenderer.SetPosition(1, new Vector3(0, 0, hit.distance));
 						}
 					}
