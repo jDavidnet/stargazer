@@ -17,29 +17,26 @@ public class Stargazer : MonoBehaviour
 	private IEnumerator Start() 
 	{
 		HelperText ht = FindObjectOfType<HelperText>();
-		bool showHelper = true;
 		float startTime = Time.realtimeSinceStartup;
+
+		yield return new WaitForSeconds(ht.ShowText("Welcome..."));
+		yield return new WaitForSeconds(ht.ShowText("Listen to us and we will delight you..."));
 
 		Renderer[] renderers = GetComponentsInChildren<Renderer>();
 		bool complete = false;
 		while (!complete)
 		{
-			complete = true;
+			complete = false;
 			foreach (Renderer r in renderers)
 			{
-				if (r.material.color.a < 0.2f)
+				if (r.material.color.a >= 0.2f)
 				{
-					// Only play the sound once all text is shown
-					complete = false;
-				}
-				else
-				{
-					// If they've already pointed at one thing, then no need for a helper
-					showHelper = false;
+					// Have them touch one of the letters to ramp it up before revealing the rest
+					complete = true;
 				}
 			}
 
-			if ((Time.realtimeSinceStartup - startTime) > 5f && showHelper)
+			if ((Time.realtimeSinceStartup - startTime) > 5f)
 			{
 				float showTime = ht.ShowText("Go ahead...\nTouch the heavens...");
 				startTime = Time.realtimeSinceStartup + showTime;
