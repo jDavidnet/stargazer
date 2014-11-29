@@ -55,7 +55,7 @@ public class RiggedFingerPointer : RiggedFinger
 					// show the LineRenderer
 					Vector3 start = GetTipPosition(); //GetBoneCenter(bone_distal);
 					Vector3 dir = GetRay().direction; //GetBoneDirection(bone_distal);
-					Vector3 end = start + dir * lineLength;
+//					Vector3 end = start + dir * lineLength;
 					//lineRenderer.enabled = true;
 					//lineRenderer.SetPosition(0, start);
 					//lineRenderer.SetPosition(1, end);
