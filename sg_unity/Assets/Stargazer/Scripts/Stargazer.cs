@@ -27,7 +27,7 @@ public class Stargazer : MonoBehaviour
 			complete = true;
 			foreach (Renderer r in renderers)
 			{
-				if (r.material.color.a < 0.1f)
+				if (r.material.color.a < 0.2f)
 				{
 					// Only play the sound once all text is shown
 					complete = false;

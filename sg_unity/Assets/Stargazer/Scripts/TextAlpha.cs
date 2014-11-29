@@ -8,7 +8,7 @@ public class TextAlpha : MonoBehaviour
 	void Awake() 
 	{
 		color = renderer.material.color;
-		color.a = 0f;
+		color.a = 0.1f;
 		renderer.material.color = color;
 	}
 	
