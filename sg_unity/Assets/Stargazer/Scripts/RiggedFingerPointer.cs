@@ -33,56 +33,56 @@ public class RiggedFingerPointer : RiggedFinger
 	{
 		base.UpdateFinger();
 		// is this the index finger?
-		if (this.fingerType == Finger.FingerType.TYPE_INDEX)
-		{
-			// which hand is this?
-			if (this.finger_.Hand.IsLeft)
-			{
-				lineRenderer = FingerLineRenderers.Left;
-			}
-			else if (this.finger_.Hand.IsRight)
-			{
-				lineRenderer = FingerLineRenderers.Right;
-			}
-			else
-			{
-				return;
-			}
-			// is the finger extended and pointing above the horizon?
-			if (this.finger_.IsExtended && this.finger_.Direction.Pitch < horizon)
-			{
-				if (lineRenderer != null) {
-					// show the LineRenderer
-					Vector3 start = GetTipPosition(); //GetBoneCenter(bone_distal);
-					Vector3 dir = GetRay().direction; //GetBoneDirection(bone_distal);
-//					Vector3 end = start + dir * lineLength;
-					//lineRenderer.enabled = true;
-					//lineRenderer.SetPosition(0, start);
-					//lineRenderer.SetPosition(1, end);
-					RaycastHit hit;
-					if (Physics.Raycast (start, dir*lineLength, out hit))
-					{
-						if (hit.collider)
-						{
-//							print ("Hit: " + hit.collider.gameObject.name);
-							hit.collider.SendMessage("OnMouseOver", SendMessageOptions.DontRequireReceiver);
-							//lineRenderer.SetPosition(1, new Vector3(0, 0, hit.distance));
-						}
-					}
-					else
-					{
-						//lineRenderer.SetPosition(1, new Vector3(0, 0, 5000));
-					}
-				}
-			}
-			else
-			{
-				if (lineRenderer != null)
-				{
-					// hide the LineRenderer
-					//lineRenderer.enabled = false;
-				}
-			}
-		}
+//		if (this.fingerType == Finger.FingerType.TYPE_INDEX)
+//		{
+//			// which hand is this?
+//			if (this.finger_.Hand.IsLeft)
+//			{
+//				lineRenderer = FingerLineRenderers.Left;
+//			}
+//			else if (this.finger_.Hand.IsRight)
+//			{
+//				lineRenderer = FingerLineRenderers.Right;
+//			}
+//			else
+//			{
+//				return;
+//			}
+//			// is the finger extended and pointing above the horizon?
+//			if (this.finger_.IsExtended && this.finger_.Direction.Pitch < horizon)
+//			{
+//				if (lineRenderer != null) {
+//					// show the LineRenderer
+//					Vector3 start = GetTipPosition(); //GetBoneCenter(bone_distal);
+//					Vector3 dir = GetRay().direction; //GetBoneDirection(bone_distal);
+////					Vector3 end = start + dir * lineLength;
+//					//lineRenderer.enabled = true;
+//					//lineRenderer.SetPosition(0, start);
+//					//lineRenderer.SetPosition(1, end);
+//					RaycastHit hit;
+//					if (Physics.Raycast (start, dir*lineLength, out hit))
+//					{
+//						if (hit.collider)
+//						{
+////							print ("Hit: " + hit.collider.gameObject.name);
+//							hit.collider.SendMessage("OnMouseOver", SendMessageOptions.DontRequireReceiver);
+//							//lineRenderer.SetPosition(1, new Vector3(0, 0, hit.distance));
+//						}
+//					}
+//					else
+//					{
+//						//lineRenderer.SetPosition(1, new Vector3(0, 0, 5000));
+//					}
+//				}
+//			}
+//			else
+//			{
+//				if (lineRenderer != null)
+//				{
+//					// hide the LineRenderer
+//					//lineRenderer.enabled = false;
+//				}
+//			}
+//		}
 	}
 }

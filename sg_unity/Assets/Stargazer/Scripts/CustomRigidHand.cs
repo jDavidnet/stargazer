@@ -21,19 +21,21 @@ public class CustomRigidHand : RigidHand
 
 		GameObject go = GameObject.FindGameObjectWithTag("CameraCenter");
 
+		RaycastHit hit;
 		for (int f = 0; f < fingers.Length; ++f) 
 		{
-			//		Vector3 start = fingers[f].GetTipPosition();
-			Vector3 direction = (fingers[f].GetTipPosition() - go.transform.position).normalized; //GetPalmNormal();
-			RaycastHit hit;
+			Vector3 direction = (fingers[f].GetTipPosition() - go.transform.position).normalized;
+//			Debug.DrawRay(go.transform.position, direction * 1000f);
 			if (Physics.Raycast(go.transform.position, direction, out hit))
 			{
-				//			if (hit.collider.gameObject.name.StartsWith("L_")) {
-				//				print ("Finger " + f + " hit: " + hit.collider.gameObject.name);
-				//				Debug.DrawRay(go.transform.position, direction);
 				hit.collider.SendMessage("OnMouseOver", SendMessageOptions.DontRequireReceiver);
-				//			}
 			}
+		}
+
+//		Debug.DrawRay(go.transform.position, GetPalmNormal() * 1000f);
+		if (Physics.Raycast(go.transform.position, GetPalmNormal(), out hit))
+		{
+			hit.collider.SendMessage("OnMouseOver", SendMessageOptions.DontRequireReceiver);
 		}
 
 //		Frame frame = controller.Frame();

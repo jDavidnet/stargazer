@@ -19,8 +19,10 @@ public class Stargazer : MonoBehaviour
 		HelperText ht = FindObjectOfType<HelperText>();
 		float startTime = Time.realtimeSinceStartup;
 
+		yield return new WaitForSeconds(5f);
 		yield return new WaitForSeconds(ht.ShowText("Welcome..."));
-		yield return new WaitForSeconds(ht.ShowText("Listen to us and we will delight you..."));
+		yield return new WaitForSeconds(ht.ShowText("Listen to us..."));
+		yield return new WaitForSeconds(ht.ShowText("And we will delight you..."));
 
 		Renderer[] renderers = GetComponentsInChildren<Renderer>();
 		bool complete = false;
