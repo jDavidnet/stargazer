@@ -55,10 +55,11 @@ public enum LM_DEVICE
 // and enable "Allow Images" in the Leap Motion settings.
 public class LeapImageRetriever : MonoBehaviour
 {
-  public const string IR_NORMAL_SHADER = "LeapMotion/LeapIRDistorted";
-  public const string IR_UNDISTORT_SHADER = "LeapMotion/LeapIRUndistorted";
-  public const string RGB_NORMAL_SHADER = "LeapMotion/LeapRGBDistorted";
-  public const string RGB_UNDISTORT_SHADER = "LeapMotion/LeapRGBUndistorted";
+  private Shader IR_NORMAL_SHADER;
+  private Shader IR_UNDISTORT_SHADER;
+  private Shader IR_UNDISTORT_SHADER_FOREGROUND;
+  private Shader RGB_NORMAL_SHADER;
+  private Shader RGB_UNDISTORT_SHADER;
 
   public const int DEFAULT_DISTORTION_WIDTH = 64;
   public const int DEFAULT_DISTORTION_HEIGHT = 64;
@@ -67,10 +68,11 @@ public class LeapImageRetriever : MonoBehaviour
   public int imageIndex = 0;
   public Color imageColor = Color.white;
   public float gammaCorrection = 1.0f;
+  public bool overlayImage = false;
   public bool undistortImage = true;
   public bool blackIsTransparent = true;
 
-  protected Controller leap_controller_;
+  private HandController controller_ = null;
   private LMDevice attached_device_ = new LMDevice();
 
   // Main texture.
@@ -97,39 +99,24 @@ public class LeapImageRetriever : MonoBehaviour
     return LM_DEVICE.PERIPHERAL;
   }
 
-  protected void SetShader() 
+  protected void SetShader()
   {
     DestroyImmediate(renderer.material);
-    if (undistortImage)
+    switch (attached_device_.type)
     {
-      switch (attached_device_.type)
-      {
-        case LM_DEVICE.PERIPHERAL:
-          renderer.material = new Material(Shader.Find(IR_UNDISTORT_SHADER));
-          break;
-        case LM_DEVICE.DRAGONFLY:
-          renderer.material = new Material(Shader.Find(RGB_UNDISTORT_SHADER));
-          break;
-        default:
-          renderer.material = new Material(Shader.Find(IR_UNDISTORT_SHADER));
-          break;
-      }
+      case LM_DEVICE.PERIPHERAL:
+        renderer.material = (undistortImage) ? new Material((overlayImage) ? IR_UNDISTORT_SHADER_FOREGROUND : IR_UNDISTORT_SHADER) : new Material(IR_NORMAL_SHADER);
+        controller_.transform.localScale = Vector3.one * 1.6f;
+        break;
+      case LM_DEVICE.DRAGONFLY:
+        renderer.material = (undistortImage) ? new Material(RGB_UNDISTORT_SHADER) : new Material(RGB_NORMAL_SHADER);
+        controller_.transform.localScale = Vector3.one;
+        break;
+      default:
+        break;
     }
-    else
-    {
-      switch (attached_device_.type)
-      {
-        case LM_DEVICE.PERIPHERAL:
-          renderer.material = new Material(Shader.Find(IR_NORMAL_SHADER));
-          break;
-        case LM_DEVICE.DRAGONFLY:
-          renderer.material = new Material(Shader.Find(RGB_NORMAL_SHADER));
-          break;
-        default:
-          renderer.material = new Material(Shader.Find(IR_NORMAL_SHADER));
-          break;
-      }
-    }
+    main_texture_.wrapMode = TextureWrapMode.Clamp;
+    image_pixels_ = new Color32[attached_device_.pixels];
   }
 
   protected void SetRenderer(ref Image image)
@@ -146,6 +133,15 @@ public class LeapImageRetriever : MonoBehaviour
     renderer.material.SetFloat("_RayOffsetY", image.RayOffsetY);
     renderer.material.SetFloat("_RayScaleX", image.RayScaleX);
     renderer.material.SetFloat("_RayScaleY", image.RayScaleY);
+  }
+
+  protected void InitiateShaders() 
+  {
+    IR_NORMAL_SHADER = Resources.Load<Shader>("LeapIRDistorted");
+    IR_UNDISTORT_SHADER = Resources.Load<Shader>("LeapIRUndistorted");
+    IR_UNDISTORT_SHADER_FOREGROUND = Resources.Load<Shader>("LeapIRUndistorted_Foreground");
+    RGB_NORMAL_SHADER = Resources.Load<Shader>("LeapRGBDistorted");
+    RGB_UNDISTORT_SHADER = Resources.Load<Shader>("LeapRGBUndistorted");
   }
 
   protected bool InitiateTexture(ref Image image)
@@ -212,7 +208,7 @@ public class LeapImageRetriever : MonoBehaviour
 
     if (!InitiateDistortion(ref image))
       return false;
-    
+
     SetShader();
     SetRenderer(ref image);
 
@@ -318,20 +314,29 @@ public class LeapImageRetriever : MonoBehaviour
       distortionY_.SetPixels32(dist_pixelsY_);
       distortionY_.Apply();
     }
-      
+
     return true;
   }
 
   void Start()
   {
-    leap_controller_ = new Controller();
-    leap_controller_.SetPolicyFlags(Controller.PolicyFlag.POLICY_IMAGES);
+    GameObject hand_controller = GameObject.Find("HandController");
+    if (hand_controller && hand_controller.GetComponent<HandController>())
+      controller_ = hand_controller.GetComponent<HandController>();
+
+    if (controller_ == null)
+      return;
+
+    controller_.GetLeapController().SetPolicyFlags(Controller.PolicyFlag.POLICY_IMAGES);
+    InitiateShaders();
   }
 
   void Update()
   {
+    if (controller_ == null)
+      return;
 
-    Frame frame = leap_controller_.Frame();
+    Frame frame = controller_.GetFrame();
 
     if (frame.Images.Count == 0)
     {
